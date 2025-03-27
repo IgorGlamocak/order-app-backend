@@ -1,9 +1,18 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Param, Body, ParseIntPipe, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ServicesService } from './services.service';
+import { CreateServiceDto } from './entity/create-service.dto';
+import { UpdateServiceDto } from './entity/update-service.dto';
 
 @Controller('services')
+@UseGuards(JwtAuthGuard)
 export class ServicesController {
   constructor(private readonly servicesService: ServicesService) {}
+
+  @Post()
+  create(@Body() dto: CreateServiceDto) {
+    return this.servicesService.create(dto);
+  }
 
   @Get()
   findAll() {
@@ -11,14 +20,18 @@ export class ServicesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.servicesService.findOne(id);
   }
 
-  @Post()
-  create(@Body() body: any) {
-    // body = { serviceName, description, price }
-    return this.servicesService.create(body);
+  @Patch(':id')
+  update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateServiceDto) {
+    return this.servicesService.update(id, dto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.servicesService.remove(id);
   }
 }
 

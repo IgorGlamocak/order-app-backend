@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Order } from './entity/order';
-import { User } from '../users/entity/user';
-import { Service } from '../services/entity/service';
+import { CreateOrderDto } from './entity/create-order.dto';
+import { UpdateOrderDto } from './entity/update-order.dto';
 
 @Injectable()
 export class OrdersService {
@@ -12,24 +12,30 @@ export class OrdersService {
     private readonly orderRepository: Repository<Order>,
   ) {}
 
+  create(dto: CreateOrderDto) {
+    const order = this.orderRepository.create(dto);
+    return this.orderRepository.save(order);
+  }
+
   findAll() {
     return this.orderRepository.find();
   }
 
-  findOne(id: number) {
-    return this.orderRepository.findOne({ where: { id } });
+  async findOne(id: number) {
+    const order = await this.orderRepository.findOne({ where: { id } });
+    if (!order) throw new NotFoundException(`Order ${id} not found`);
+    return order;
   }
 
-  async create(data: {
-    user: User;
-    service: Service;
-    quantity: number;
-    totalPrice?: number;
-  }) {
-    // Lahko dodaš logiko za izračun totalPrice = price * quantity
-    // ali pa prej dobiš user/service iz baz
-    const order = this.orderRepository.create(data);
+  async update(id: number, dto: UpdateOrderDto) {
+    const order = await this.orderRepository.preload({ id, ...dto });
+    if (!order) throw new NotFoundException(`Order ${id} not found`);
     return this.orderRepository.save(order);
+  }
+
+  async remove(id: number) {
+    const order = await this.findOne(id);
+    return this.orderRepository.remove(order);
   }
 }
 

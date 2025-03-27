@@ -10,6 +10,7 @@ import { OrdersModule } from './orders/orders.module';
 import { User } from './users/entity/user';
 import { Service } from './services/entity/service';
 import { Order } from './orders/entity/order';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -28,7 +29,8 @@ import { Order } from './orders/entity/order';
     }),
     UsersModule,
     ServicesModule,
-    OrdersModule,],
+    OrdersModule,
+    AuthModule,],
   controllers: [AppController],
   providers: [AppService],
 })
