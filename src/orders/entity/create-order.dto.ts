@@ -10,4 +10,7 @@ export class CreateOrderDto {
   @IsNumber()
   @IsOptional()
   quantity?: number;
+
+  @IsNumber()
+  totalPrice: number;
 }

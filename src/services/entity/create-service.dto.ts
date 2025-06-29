@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsNumber } from 'class-validator';
+import { IsString, IsOptional, IsNumber, IsUrl } from 'class-validator';
 
 export class CreateServiceDto {
   @IsString()
@@ -10,4 +10,13 @@ export class CreateServiceDto {
 
   @IsNumber()
   price: number;
+
+  @IsOptional() 
+  @IsString() 
+  executionTime?: string;
+
+  @IsOptional() 
+  @IsUrl() 
+  imageUrl?: string;
+
 }

@@ -15,6 +15,12 @@ export class Service {
   @Column('decimal', { precision: 10, scale: 2 })
   price: number;
 
+  @Column({ nullable: true })
+  executionTime?: string;
+
+  @Column({ nullable: true })
+  imageUrl?: string;
+
   // Povezava z naročili (en service -> več orders)
   @OneToMany(() => Order, (order) => order.service)
   orders: Order[];
