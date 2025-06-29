@@ -11,12 +11,11 @@ export class CreateServiceDto {
   @IsNumber()
   price: number;
 
-  @IsOptional() 
-  @IsString() 
+  @IsOptional()
+  @IsString()
   executionTime?: string;
 
-  @IsOptional() 
-  @IsUrl() 
+  @IsOptional()
+  @IsUrl()
   imageUrl?: string;
-
 }

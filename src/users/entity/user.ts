@@ -18,6 +18,9 @@ export class User {
   @Column({ nullable: true })
   avatar?: string;
 
+  @Column({ default: 'user' })
+  role: 'user' | 'admin';
+
   // En user ima lahko več naročil
   @OneToMany(() => Order, (order) => order.user)
   orders: Order[];

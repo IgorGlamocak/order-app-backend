@@ -10,11 +10,11 @@ import { Service } from './services/entity/service';
 import { Order } from './orders/entity/order';
 import { AuthModule } from './auth/auth.module';
 
-
 @Module({
-  imports: [ConfigModule.forRoot({
-    isGlobal: true,
-  }),
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DATABASE_HOST || 'localhost',
@@ -28,7 +28,8 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     ServicesModule,
     OrdersModule,
-    AuthModule,],
+    AuthModule,
+  ],
   controllers: [],
   providers: [],
 })

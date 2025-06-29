@@ -1,0 +1,19 @@
+### LOGIN (to get the token)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@admin.com",
+  "password": "Admin321!"
+}
+
+###
+
+### PATCH /users/1 – **now with the Bearer token**  
+PATCH http://localhost:3000/users/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUxMjIyNjY3LCJleHAiOjE3NTEyMjYyNjd9.NaU6gzifA_OwnZrYRHXcLjiXnWR8rr5E3DT1eMtiFTE
+
+{
+  "password": "Jane321!"
+}

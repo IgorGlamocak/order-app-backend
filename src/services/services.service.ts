@@ -2,8 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Service } from './entity/service';
-import { CreateServiceDto } from './entity/create-service.dto';
-import { UpdateServiceDto } from './entity/update-service.dto';
+import { UpdateServiceDto } from './dto/update-service.dto';
+import { CreateServiceDto } from './dto/create-service.dto';
 
 @Injectable()
 export class ServicesService {
@@ -38,5 +38,3 @@ export class ServicesService {
     return this.serviceRepository.remove(service);
   }
 }
-
-

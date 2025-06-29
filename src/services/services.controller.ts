@@ -1,8 +1,18 @@
-import { Controller, Get, Post, Patch, Delete, Param, Body, ParseIntPipe, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Patch,
+  Delete,
+  Param,
+  Body,
+  ParseIntPipe,
+  UseGuards,
+} from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ServicesService } from './services.service';
-import { CreateServiceDto } from './entity/create-service.dto';
-import { UpdateServiceDto } from './entity/update-service.dto';
+import { CreateServiceDto } from './dto/create-service.dto';
+import { UpdateServiceDto } from './dto/update-service.dto';
 
 @Controller('services')
 @UseGuards(JwtAuthGuard)
@@ -34,4 +44,3 @@ export class ServicesController {
     return this.servicesService.remove(id);
   }
 }
-
